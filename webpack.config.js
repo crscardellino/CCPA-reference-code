@@ -17,6 +17,11 @@ const commonConfig = (env) => {
       filename: '[name].js',
       path: path.resolve(__dirname, 'build', env)
     },
+    module: {
+      rules: [
+        { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader'}
+      ],
+    },
     plugins: [
       new HtmlWebpackPlugin({
         inject: false,
@@ -52,7 +57,7 @@ const envSpecificConfig = (env) =>
       {
         plugins: [
           new CleanWebpackPlugin([path.resolve('build', env)]),
-          // new UglifyJSPlugin()
+          new UglifyJSPlugin()
         ]
       };
 
